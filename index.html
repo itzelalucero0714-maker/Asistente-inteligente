@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Asistente Inteligente</title>
+</head>
+<body>
+
+<h2>Asistente inteligente</h2>
+
+<input type="text" id="pregunta" placeholder="Describe tu problema">
+<button onclick="asistente()">Consultar</button>
+
+<p id="respuesta"></p>
+
+<script>
+function asistente(){
+    let texto = document.getElementById("pregunta").value.toLowerCase();
+    let respuesta = "";
+
+    if(texto.includes("dolor")){
+        respuesta = "Te recomendamos agendar una cita.";
+    } else if(texto.includes("fiebre")){
+        respuesta = "Podrías necesitar atención médica.";
+    } else if(texto.includes("tos")){
+        respuesta = "Podría ser gripe, consulta a un médico.";
+    } else {
+        respuesta = "Consulta con un especialista.";
+    }
+
+    document.getElementById("respuesta").innerText = respuesta;
+}
+</script>
+
+</body>
+</html>
