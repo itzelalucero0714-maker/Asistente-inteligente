@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Asistente Inteligente</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    text-align: center;
+    padding: 40px;
+}
+
+.container {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 350px;
+    margin: auto;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-consultar {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-limpiar {
+    background-color: #6c757d;
+    color: white;
+}
+
+#estado {
+    margin-top: 10px;
+    color: #888;
+    font-size: 14px;
+}
+
+#respuesta {
+    margin-top: 15px;
+    font-weight: bold;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Asistente Inteligente</h2>
+
+    <p>Describe tu síntoma (ej: fiebre, tos, dolor de cabeza)</p>
+
+    <label for="pregunta">Síntoma:</label><br>
+    <input type="text" id="pregunta" placeholder="Escribe aquí...">
+
+    <br>
+    <button class="btn-consultar" onclick="asistente()">Consultar</button>
+    <button class="btn-limpiar" onclick="limpiar()">Limpiar</button>
+
+    <p id="estado"></p>
+    <p id="respuesta"></p>
+</div>
+
+<script>
+
+// Permitir Enter
+document.getElementById("pregunta").addEventListener("keypress", function(e){
+    if(e.key === "Enter"){
+        asistente();
+    }
+});
+
+function asistente(){
+    let texto = document.getElementById("pregunta").value.toLowerCase().trim();
+    let respuesta = "";
+
+    // Validación
+    if(texto === ""){
+        document.getElementById("respuesta").innerText = "⚠️ Por favor escribe un síntoma.";
+        return;
+    }
+
+    // Estado (feedback)
+    document.getElementById("estado").innerText = "⏳ Analizando...";
+    document.getElementById("respuesta").innerText = "";
+
+    // Simular proceso
+    setTimeout(() => {
+
+        if(texto.includes("dolor")){
+            respuesta = "Podrías estar experimentando dolor. Te recomendamos acudir a consulta médica.";
+        } else if(texto.includes("fiebre")){
+            respuesta = "La fiebre puede ser señal de infección. Considera acudir con un médico.";
+        } else if(texto.includes("tos")){
+            respuesta = "Podría tratarse de gripe o infección respiratoria. Consulta a un especialista.";
+        } else {
+            respuesta = "No se reconoce el síntoma. Consulta con un especialista.";
+        }
+
+        document.getElementById("estado").innerText = "✅ Resultado:";
+        document.getElementById("respuesta").innerText = respuesta;
+
+    }, 1000);
+}
+
+// Limpiar
+function limpiar(){
+    document.getElementById("pregunta").value = "";
+    document.getElementById("respuesta").innerText = "";
+    document.getElementById("estado").innerText = "";
+}
+
+</script>
+
+</body>
+</html>
